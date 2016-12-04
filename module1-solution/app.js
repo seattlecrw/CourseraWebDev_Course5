@@ -12,7 +12,8 @@ function LunchCheckController($scope) {
   $scope.dataCheckTextBox = {"border-color" : "black"};
 
   $scope.checkItems = function () {
-    var items = $scope.menu.split(",").filter(Boolean);
+    var re = /\s*,\s*/;
+    var items = $scope.menu.split(re).filter(Boolean);
 
     if (items.length === 0) {
       // no data entered
