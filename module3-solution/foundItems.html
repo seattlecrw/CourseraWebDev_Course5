@@ -1,0 +1,6 @@
+<ul>
+  <li ng-repeat="found in narrowed.found">
+    {{ found.name }}, {{ found.short_name }}, {{ found.description }}
+    <button ng-click="narrowed.onRemove({index: $index});">Don't want this one!</button>
+  </li>
+</ul>
