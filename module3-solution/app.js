@@ -83,7 +83,7 @@ function FoundItemsDirectiveController() {
   var narrowed = this;
 
 	narrowed.showEmpty = function() {
-    return (narrowed.found.length === 0);
+    return (narrowed.found.length !== undefined && narrowed.found.length === 0);
 	}
 }
 
