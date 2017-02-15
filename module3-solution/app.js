@@ -5,8 +5,64 @@ angular.module('NarrowItDownApp', [])
 .controller('NarrowItDownController', NarrowItDownController)
 .service('MenuSearchService', MenuSearchService)
 .directive('foundItems', FoundItemsDirective)
-.constant('ApiBasePath', "https://davids-restaurant.herokuapp.com");
+.constant('ApiPath', "https://davids-restaurant.herokuapp.com/menu_items.json");
 
+NarrowItDownController.$inject = ['MenuSearchService'];
+function NarrowItDownController(MenuSearchService) {
+  var narrowed = this;
+  var mySearch = null;
+  narrowed.found = {};
+
+  // Add ability to select search term
+  narrowed.getItems = function() {
+    if (narrowed.searchTerm.length > 0) {
+      mySearch = narrowed.searchTerm;
+    } else  {
+      mySearch = null;
+    }
+
+    var promise = MenuSearchService.getMatchedMenuItems(mySearch);
+    promise.then(function (response) {
+      narrowed.found = response;
+    })
+    .catch(function (error) {
+      console.log("Something went terribly wrong.");
+    });
+  };
+
+  // function to remove unwanted items
+  narrowed.removeItem = function (itemIndex) {
+    narrowed.found.splice(itemIndex, 1);
+  };
+}
+
+MenuSearchService.$inject = ['$http', 'ApiPath'];
+function MenuSearchService($http, ApiPath) {
+  var service = this;
+
+  service.getMatchedMenuItems = function(searchTerm) {
+    return $http({
+      method: "GET",
+      url: ApiPath,
+    }).then(function (result) {
+      // process result and only keep items that match
+      if (searchTerm !== null) {
+        var items = result.data.menu_items;
+        var foundItems = [];
+        for (var i = 0; i < items.length; i++) {
+          var item = items[i];
+          if (item.description.toLowerCase().indexOf(searchTerm) != -1) {
+             foundItems.push(item);
+          };
+        };
+      };
+      // return processed items
+      return foundItems;
+    });
+  }
+}
+
+FoundItemsDirective.$inject = [];
 function FoundItemsDirective() {
   var ddo = {
     restrict: 'E',
@@ -24,60 +80,11 @@ function FoundItemsDirective() {
 }
 
 function FoundItemsDirectiveController() {
-	   var narrowed = this;
-
-		list.showEmpty = function() {
-		   return (narrowed.foundItems.length == 0);
-		}
-	}
-
-NarrowItDownController.$inject = ['MenuSearchService'];
-function NarrowItDownController(MenuSearchService) {
   var narrowed = this;
-  var mySearch = null;
-  narrowed.found = {};
 
-  // Add ability to select search term
-  narrowed.getItems = function() {
-    mySearch = narrowed.searchTerm;
-
-    var promise = MenuSearchService.getMatchedMenuItems(mySearch);
-    promise.then(function (response) {
-      narrowed.found = response;
-    })
-    .catch(function (error) {
-      console.log("Something went terribly wrong.");
-    });
-  };
-
-  // function to remove unwanted items
-  narrowed.removeItem = function (itemIndex) {
-    narrowed.found.splice(itemIndex, 1);
-  };
-}
-
-MenuSearchService.$inject = ['$http', 'ApiBasePath'];
-function MenuSearchService($http, ApiBasePath) {
-  var service = this;
-
-  service.getMatchedMenuItems = function(searchTerm) {
-    return $http({
-      method: "GET",
-      url: (ApiBasePath + "/menu_items.json"),
-    }).then(function (result) {
-      // process result and only keep items that match
-      var items = result.data.menu_items;
-      var foundItems = [];
-      for (var i = 0; i < items.length; i++) {
-        var item = items[i];
-        if (item.description.toLowerCase().indexOf(searchTerm) != -1) {
-           foundItems.push(item);
-        };
-      };
-      // return processed items
-      return foundItems;
-    });
-  }
+	narrowed.showEmpty = function() {
+    return (narrowed.found.length === 0);
+	}
 }
 
 })();
