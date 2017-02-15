@@ -14,7 +14,7 @@ function FoundItemsDirective() {
       found: '<',
       onRemove: '&'
     },
-    controller: NarrowItDownController,
+    controller: FoundItemsDirectiveController,
     controllerAs: 'narrowed',
     bindToController: true,
     templateUrl: 'foundItems.html'
@@ -22,6 +22,14 @@ function FoundItemsDirective() {
 
   return ddo;
 }
+
+function FoundItemsDirectiveController() {
+	   var narrowed = this;
+
+		list.showEmpty = function() {
+		   return (narrowed.foundItems.length == 0);
+		}
+	}
 
 NarrowItDownController.$inject = ['MenuSearchService'];
 function NarrowItDownController(MenuSearchService) {
