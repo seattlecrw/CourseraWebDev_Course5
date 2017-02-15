@@ -11,19 +11,19 @@ NarrowItDownController.$inject = ['MenuSearchService'];
 function NarrowItDownController(MenuSearchService) {
   var narrowed = this;
   var mySearch = null;
+  var searched = false;
   narrowed.found = {};
 
   // Add ability to select search term
   narrowed.getItems = function() {
-    // reset narrowed.found
-    narrowed.found ={};
-
-    if (narrowed.searchTerm !== undefined && narrowed.searchTerm.length > 0) {
-      mySearch = narrowed.searchTerm;
-    } else  {
+    // set search parameter
+    if (narrowed.searchTerm === null || narrowed.searchTerm === "") {
       mySearch = null;
+    } else  {
+      mySearch = narrowed.searchTerm;
     }
 
+    // resolve promise from http call
     var promise = MenuSearchService.getMatchedMenuItems(mySearch);
     promise.then(function (response) {
       narrowed.found = response;
@@ -86,7 +86,7 @@ function FoundItemsDirectiveController() {
   var narrowed = this;
 
 	narrowed.showEmpty = function() {
-    return (narrowed.found !== undefined);
+    return (narrowed.found === undefined || narrowed.found.length === 0);
 	}
 }
 
