@@ -15,6 +15,9 @@ function NarrowItDownController(MenuSearchService) {
 
   // Add ability to select search term
   narrowed.getItems = function() {
+    // reset narrowed.found
+    narrowed.found ={};
+
     if (narrowed.searchTerm !== undefined && narrowed.searchTerm.length > 0) {
       mySearch = narrowed.searchTerm;
     } else  {
