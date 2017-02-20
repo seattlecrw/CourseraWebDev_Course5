@@ -3,15 +3,10 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/styles.css">
-    <title>Coursera Menu Application Site</title>
+    <title>Coursera Menu Application</title>
   </head>
   <body>
     <h1>Welcome to the Coursera Menu Application!</h1>
-
-    <div class="tabs">
-      <a ui-sref="tab1" ui-sref-active="activeTab">Tab 1</a>
-      <a ui-sref="tab2" ui-sref-active="activeTab">Tab 2</a>
-    </div>
 
     <ui-view></ui-view>
 
@@ -20,7 +15,18 @@
     <script src="lib/angular-ui-router.min.js"></script>
 
     <!-- Modules -->
-    <script src="src/app.js"></script>
+    <script src="src/menu/menuapp.module.js"></script>
+    <script src="src/menu/data.module.js"></script>
+
+    <!-- Routes -->
+    <script src="src/routes.js"></script>
+
+    <!-- 'MenuApp' module artifacts -->
+    <script src="src/menu/categories.component.js"></script>
+    <script src="src/menu/items.component.js"></script>
+    <script src="src/menu/menudata.service.js"></script>
+    <script src="src/menu/categorylist.controller.js"></script>
+    <script src="src/menu/itemlist.controller.js"></script>
 
   </body>
 </html>
