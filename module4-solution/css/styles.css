@@ -2,15 +2,26 @@ body {
   font-size: 1.2em;
 }
 
-div.tabs > a, div.tabs > button {
-  margin-right: 10px;
-  font-size: 1.2em;
+li > a {
+  text-decoration: none;
 }
 
-div.tabs {
-  margin-bottom: 10px;
+li > a:hover {
+  text-decoration: none;
+  color: red;
 }
 
-.activeTab {
-  font-weight: bold;
+li > a:visited {
+  text-decoration: none;
+  color: purple;
+}
+
+.tab {
+  text-decoration: none;
+  color: blue;
+}
+
+.tab:hover {
+  text-decoration: none;
+  color: red;
 }
