@@ -46,17 +46,17 @@ function routeConfig ($stateProvider) {
       templateUrl: 'src/public/signup/signup.html',
       controller: 'SignupController',
       controllerAs: 'signupCtrl'
-    // })
-    // .state('public.user', {
-    //   url: '/user',
-    //   templateUrl: 'src/public/user/user.html',
-    //   controller: 'UserController',
-    //   controllerAs: 'userCtrl',
-    //   resolve: {
-    //     user: ['UserService', function (UserService) {
-    //       return UserService.getCurrentUser();
-    //     }]
-    //   }
-    // });
+    })
+    .state('public.user', {
+      url: '/user',
+      templateUrl: 'src/public/user/user.html',
+      controller: 'UserController',
+      controllerAs: 'userCtrl',
+      resolve: {
+        user: ['UserService', function (UserService) {
+          return UserService.getCurrentUser();
+        }]
+      }
+    });
 }
 })();

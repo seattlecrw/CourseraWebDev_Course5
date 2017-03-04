@@ -1,0 +1,24 @@
+<div class="container">
+  <h2 id="info_title">My User Information</h2>
+
+  <div class="myInfo" ng-if="userCtrl.dataFound">
+    <div class="aboutMe">
+      Name: {{ userCtrl.user.firstname }} {{ userCtrl.user.lastname }}<br>
+      Email: {{ userCtrl.user.email }}<br>
+      <span ng-if="userCtrl.user.phone">Phone:{{ userCtrl.user.phone }}</span>
+    </div>
+
+    <div class="myFave">
+      Favorite Item: {{ userCtrl.favorite.short_name }}<br>
+      Title: {{ userCtrl.favorite.name }}<br>
+      Description: {{ userCtrl.favorite.description }}<br>
+      <img class="img-responsive" width="250" height="150" ng-src="{{ userCtrl.basePath }}/images/{{ userCtrl.favorite.short_name }}.jpg" alt="{{ userCtrl.favorite.name }}">
+    </div>
+  </div>
+
+  <div class="myInfo" ng-if="userCtrl.dataError">
+    <div class="error">
+      Not Signed Up Yet. <a ui-sref="public.signup"> Sign up Now!</a>
+    </div>
+  </div>
+</div>

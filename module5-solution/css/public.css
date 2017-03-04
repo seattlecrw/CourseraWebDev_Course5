@@ -139,7 +139,36 @@ input {
 .ng-touched.ng-invalid {
   border: 2px red solid;
 }
+#success {
+  margin-top: 20px;
+  font-size: 24px;
+}
 /* END SIGNUP PAGE */
+
+/* USER INFO PAGE */
+#info_title {
+  font-size: 36px;
+  color: #f6b319;
+}
+.aboutMe, .myFave {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+img {
+  margin-top: 20px;
+}
+.error {
+  margin-top: 30px;
+  font-size: 20px;
+}
+.error a {
+  color: cyan:
+}
+.error a:hover {
+  color: #f6b319;
+}
+/* END USER INFO PAGE */
+
 
 /********** Large devices only **********/
 @media (min-width: 1200px) {
@@ -188,7 +217,7 @@ input {
     text-align: center;
   }
   .menu-item-description {
-    text-align: center;;
+    text-align: center;
   }
 }
 
