@@ -113,6 +113,33 @@ h3.menu-item-title {
 }
 /* END SINGLE CATEGORY PAGE */
 
+/* SIGNUP PAGE */
+legend {
+  font-size: 36px;
+  color: #f6b319;
+}
+input {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: black;
+}
+.submit_button {
+  font-size: 24px;
+  color: black;
+}
+.submit_button:hover {
+  font-size: 24px;
+  color: white;
+  background-color: darkblue;
+  border: 0px;
+}
+.ng-touched.ng-valid {
+  border: 2px green solid;
+}
+.ng-touched.ng-invalid {
+  border: 2px red solid;
+}
+/* END SIGNUP PAGE */
 
 /********** Large devices only **********/
 @media (min-width: 1200px) {
